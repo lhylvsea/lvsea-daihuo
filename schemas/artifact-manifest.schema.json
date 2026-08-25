@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "lvsea-daihuo artifact manifest",
+  "type": "object",
+  "required": ["skill", "status", "missing_evidence"],
+  "properties": {
+    "skill": {"const": "lvsea-daihuo"},
+    "status": {"enum": ["preview", "ready", "blocked", "missing_evidence", "provider_pending"]},
+    "final_video": {"type": ["string", "null"]},
+    "gate_status": {"enum": ["pass", "pass_with_reviewed_warn", "warn", "fail", "not_run"]},
+    "human_reviewed": {"type": "boolean"},
+    "missing_evidence": {"type": "array", "items": {"type": "string"}},
+    "events": {"type": "array"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"status": {"const": "ready"}}},
+      "then": {
+        "required": ["final_video", "gate_status", "human_reviewed"],
+        "properties": {
+          "final_video": {"type": "string", "minLength": 1},
+          "gate_status": {"enum": ["pass", "pass_with_reviewed_warn"]},
+          "human_reviewed": {"const": true}
+        }
+      }
+    }
+  ],
+  "additionalProperties": true
+}

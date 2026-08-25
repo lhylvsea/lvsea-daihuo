@@ -1,0 +1,104 @@
+{
+  "name": "lvsea-daihuo",
+  "version": "0.1.0",
+  "owner": "海洋哥 / lhylvsea",
+  "updated_at": "2026-08-25",
+  "review_due": "2026-11-25",
+  "status": "active",
+  "maturity_tier": "governed",
+  "lifecycle_stage": "library",
+  "context_budget_tier": "governed",
+  "review_cadence": "quarterly",
+  "upstream_inspiration": [
+    "https://github.com/liangdabiao/ecom-details-image",
+    "https://github.com/xixihhhh/clipforge",
+    "https://github.com/clipcat-ai/clipcat-skill",
+    "https://github.com/Ceeon/videocut-skills",
+    "https://github.com/lhylvsea/lvsea-zao-skill"
+  ],
+  "upstream_inputs": {
+    "ecom-details-image": {
+      "source": "https://github.com/liangdabiao/ecom-details-image",
+      "reviewed_commit": "1ec867b743179af3598db55388f65287c4e04de1",
+      "adopted": "prompt-first product visual route"
+    },
+    "clipforge-video": {
+      "source": "https://github.com/xixihhhh/clipforge",
+      "reviewed_commit": "d30301a4661ac502ab1afc04c888c66f1834d289",
+      "adopted": "async compose, gate, contact sheet, bounded repair"
+    },
+    "clipcat": {
+      "source": "https://github.com/clipcat-ai/clipcat-skill",
+      "reviewed_commit": "1ffa5a644015e620b24434d9a2fc6542b952f16c",
+      "adopted": "research, quote-before-paid, async task ledger"
+    },
+    "videocut-skills": {
+      "source": "https://github.com/Ceeon/videocut-skills",
+      "reviewed_commit": "2e51611965af6e6b8baea3bfc82995b5c9e8f5ef",
+      "adopted": "review ledger, subtitle, visual, export separation"
+    },
+    "lvsea-zao-skill": {
+      "source": "https://github.com/lhylvsea/lvsea-zao-skill",
+      "adopted": "governed package, evidence boundary, trigger eval, release gates"
+    }
+  },
+  "intent": {
+    "job_to_be_done": "把商品事实、爆款结构、商品视觉、脚本、口播和字幕组织为可复用、可审计、可降级的带货短视频生产流程。",
+    "target_users": [
+      "中文电商内容创作者",
+      "短视频运营人员",
+      "需要本地可复核出片链路的 Agent 用户"
+    ],
+    "inputs": [
+      "商品事实和来源",
+      "商品图或商品链接",
+      "参考视频或研究关键词",
+      "真人口播素材",
+      "平台、时长、画幅和预算约束"
+    ],
+    "outputs": [
+      "研究记录",
+      "商品视觉 Prompt 或图片",
+      "候选脚本和判断记录",
+      "字幕和最终 MP4",
+      "素材授权、成本、QC 和缺证报告"
+    ],
+    "exclusions": [
+      "无证据的功效、价格、销量或排名编造",
+      "未经确认的付费生成",
+      "自动平台发布",
+      "把安装状态或静态检查冒充真实成片"
+    ]
+  },
+  "risk": {
+    "output_risk": "medium",
+    "execution_risk": "high when providers or paid APIs are enabled",
+    "trust_boundary": "external content and paid providers",
+    "rollback_boundary": "workspace artifact directory and feature branch; never overwrite raw media"
+  },
+  "permissions": {
+    "network": "read-only research and provider calls only after user request; no automatic publishing",
+    "file_write": "workspace artifact directory and explicit package files only",
+    "subprocess": "local Python, Node, FFmpeg, ClipForge, Clipcat, and chengfeng Runtime commands as required",
+    "secrets": "never read into public artifacts, logs, reports, or Git history",
+    "paid": "quote and explicit confirmation required",
+    "external_write": "disabled by default"
+  },
+  "release_gates": [
+    "intent_and_evidence_gate",
+    "keep_adapt_reject_invent_ledger",
+    "single_root_entrypoint",
+    "trigger_regression",
+    "context_budget",
+    "skill_ir",
+    "secret_scan",
+    "provider_boundary",
+    "paid_confirmation",
+    "human_contact_sheet_review",
+    "ffprobe_and_subtitle_qc",
+    "feature_branch",
+    "pull_request_review",
+    "immutable_semver_release",
+    "clean_install"
+  ]
+}
