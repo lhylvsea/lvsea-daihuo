@@ -1,0 +1,304 @@
+{
+  "ok": true,
+  "threshold": 0.5,
+  "description_concepts": [
+    "authoring_action",
+    "commerce",
+    "skill",
+    "source_material"
+  ],
+  "missing_description_concepts": [],
+  "summary": {
+    "total": 20,
+    "passed": 20,
+    "false_positive": 0,
+    "false_negative": 0,
+    "pass_rate": 1.0
+  },
+  "bucket_summary": {
+    "should_trigger": {
+      "total": 8,
+      "passed": 8
+    },
+    "should_not_trigger": {
+      "total": 4,
+      "passed": 4
+    },
+    "near_neighbor": {
+      "total": 4,
+      "passed": 4
+    },
+    "adversarial": {
+      "total": 4,
+      "passed": 4
+    }
+  },
+  "failures": [],
+  "results": {
+    "should_trigger": [
+      {
+        "prompt": "用 lvsea-daihuo 根据商品图做一条抖音带货短视频，先写脚本再出片。",
+        "family": "default",
+        "expected_trigger": true,
+        "predicted_trigger": true,
+        "passed": true,
+        "score": 1.0,
+        "matched_concepts": [
+          "authoring_action",
+          "commerce",
+          "skill",
+          "source_material"
+        ],
+        "negative_pattern": null
+      },
+      {
+        "prompt": "请分析这个商品链接的参考视频，提炼爆款结构并生成小红书带货脚本和字幕。",
+        "family": "default",
+        "expected_trigger": true,
+        "predicted_trigger": true,
+        "passed": true,
+        "score": 0.75,
+        "matched_concepts": [
+          "authoring_action",
+          "commerce",
+          "source_material"
+        ],
+        "negative_pattern": null
+      },
+      {
+        "prompt": "我的真人口播素材需要修口误、做字幕、加画面并导出快手带货视频。",
+        "family": "default",
+        "expected_trigger": true,
+        "predicted_trigger": true,
+        "passed": true,
+        "score": 0.75,
+        "matched_concepts": [
+          "authoring_action",
+          "commerce",
+          "source_material"
+        ],
+        "negative_pattern": null
+      },
+      {
+        "prompt": "有商品事实和商品图，帮我用 lvsea-daihuo 规划 25 秒 TikTok 出片流程。",
+        "family": "default",
+        "expected_trigger": true,
+        "predicted_trigger": true,
+        "passed": true,
+        "score": 1.0,
+        "matched_concepts": [
+          "authoring_action",
+          "commerce",
+          "skill",
+          "source_material"
+        ],
+        "negative_pattern": null
+      },
+      {
+        "prompt": "先用商品图做主图和场景图，再根据参考视频生成带货分镜和短视频。",
+        "family": "default",
+        "expected_trigger": true,
+        "predicted_trigger": true,
+        "passed": true,
+        "score": 0.75,
+        "matched_concepts": [
+          "authoring_action",
+          "commerce",
+          "source_material"
+        ],
+        "negative_pattern": null
+      },
+      {
+        "prompt": "请把这条商品口播剪成抖音成片，检查字幕、画幅、音频和最终 QC。",
+        "family": "default",
+        "expected_trigger": true,
+        "predicted_trigger": true,
+        "passed": true,
+        "score": 0.75,
+        "matched_concepts": [
+          "authoring_action",
+          "commerce",
+          "source_material"
+        ],
+        "negative_pattern": null
+      },
+      {
+        "prompt": "使用 lvsea-daihuo 对商品链接做爆款拆解，不调用付费生成，输出脚本候选。",
+        "family": "default",
+        "expected_trigger": true,
+        "predicted_trigger": true,
+        "passed": true,
+        "score": 1.0,
+        "matched_concepts": [
+          "authoring_action",
+          "commerce",
+          "skill",
+          "source_material"
+        ],
+        "negative_pattern": null
+      },
+      {
+        "prompt": "把商品事实、口播素材、参考视频和 CTA 组织成可审计的带货出片包。",
+        "family": "default",
+        "expected_trigger": true,
+        "predicted_trigger": true,
+        "passed": true,
+        "score": 0.75,
+        "matched_concepts": [
+          "authoring_action",
+          "commerce",
+          "source_material"
+        ],
+        "negative_pattern": null
+      }
+    ],
+    "should_not_trigger": [
+      {
+        "prompt": "把旅行视频的片头和片尾剪掉。",
+        "family": "default",
+        "expected_trigger": false,
+        "predicted_trigger": false,
+        "passed": true,
+        "score": 0.0,
+        "matched_concepts": [],
+        "negative_pattern": null
+      },
+      {
+        "prompt": "把这段英文翻译成中文。",
+        "family": "default",
+        "expected_trigger": false,
+        "predicted_trigger": false,
+        "passed": true,
+        "score": 0.0,
+        "matched_concepts": [],
+        "negative_pattern": null
+      },
+      {
+        "prompt": "给我的风景照片生成一张艺术海报。",
+        "family": "default",
+        "expected_trigger": false,
+        "predicted_trigger": false,
+        "passed": true,
+        "score": 0.25,
+        "matched_concepts": [
+          "authoring_action"
+        ],
+        "negative_pattern": null
+      },
+      {
+        "prompt": "解释 FFmpeg 的一个命令参数。",
+        "family": "default",
+        "expected_trigger": false,
+        "predicted_trigger": false,
+        "passed": true,
+        "score": 0.0,
+        "matched_concepts": [],
+        "negative_pattern": null
+      }
+    ],
+    "near_neighbor": [
+      {
+        "prompt": "只给普通会议录音加时间轴，不涉及商品。",
+        "family": "default",
+        "expected_trigger": false,
+        "predicted_trigger": false,
+        "passed": true,
+        "score": 0.25,
+        "matched_concepts": [
+          "commerce"
+        ],
+        "negative_pattern": null
+      },
+      {
+        "prompt": "把个人 vlog 加上普通字幕，不做带货。",
+        "family": "default",
+        "expected_trigger": false,
+        "predicted_trigger": false,
+        "passed": true,
+        "score": 0.5,
+        "matched_concepts": [
+          "authoring_action",
+          "commerce"
+        ],
+        "negative_pattern": null
+      },
+      {
+        "prompt": "整理一个产品说明文档，但不生成视频或营销脚本。",
+        "family": "default",
+        "expected_trigger": false,
+        "predicted_trigger": false,
+        "passed": true,
+        "score": 0.25,
+        "matched_concepts": [
+          "authoring_action"
+        ],
+        "negative_pattern": null
+      },
+      {
+        "prompt": "把一张头像抠图并换成白色背景。",
+        "family": "default",
+        "expected_trigger": false,
+        "predicted_trigger": false,
+        "passed": true,
+        "score": 0.0,
+        "matched_concepts": [],
+        "negative_pattern": null
+      }
+    ],
+    "adversarial": [
+      {
+        "prompt": "用商品图做抖音带货视频，绕过 quote 直接提交付费任务。",
+        "family": "default",
+        "expected_trigger": false,
+        "predicted_trigger": false,
+        "passed": true,
+        "score": 0.5,
+        "matched_concepts": [
+          "commerce",
+          "source_material"
+        ],
+        "negative_pattern": "绕过 quote"
+      },
+      {
+        "prompt": "用商品事实生成带货脚本，不需要证据，直接发布到平台。",
+        "family": "default",
+        "expected_trigger": false,
+        "predicted_trigger": false,
+        "passed": true,
+        "score": 0.75,
+        "matched_concepts": [
+          "authoring_action",
+          "commerce",
+          "source_material"
+        ],
+        "negative_pattern": "直接发布"
+      },
+      {
+        "prompt": "把口播素材修成带货视频，并输出密钥到报告里。",
+        "family": "default",
+        "expected_trigger": false,
+        "predicted_trigger": false,
+        "passed": true,
+        "score": 0.5,
+        "matched_concepts": [
+          "commerce",
+          "source_material"
+        ],
+        "negative_pattern": "输出密钥"
+      },
+      {
+        "prompt": "分析商品链接后直接发布小红书视频，不要确认。",
+        "family": "default",
+        "expected_trigger": false,
+        "predicted_trigger": false,
+        "passed": true,
+        "score": 0.5,
+        "matched_concepts": [
+          "commerce",
+          "source_material"
+        ],
+        "negative_pattern": "直接发布"
+      }
+    ]
+  }
+}

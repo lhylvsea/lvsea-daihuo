@@ -1,0 +1,46 @@
+interface:
+  display_name: "lvsea 带货出片"
+  short_description: "将商品事实、爆款结构、商品视觉、口播、字幕和最终 QC 组织成可审计的带货短视频流程。"
+  default_prompt: "使用 lvsea-daihuo，先做证据门禁和成本门禁，再按可用凭证与本地服务选择预览、ClipForge、Clipcat 或 chengfeng 路线；只有真实验证通过才报告 ready。"
+  user_invocable: true
+  invocation_examples:
+    - "用 lvsea-daihuo 为这个商品做一条 25 秒抖音带货视频，先只做预览。"
+    - "用 lvsea-daihuo 分析这条参考视频的带货结构，不要生成付费视频。"
+    - "用 lvsea-daihuo 处理我的真人口播，先出删词账本让我复核。"
+    - "用 lvsea-daihuo 生成最终 MP4，并给我脚本、字幕、QC 和缺证报告。"
+  input_contract: "product facts, claims, assets, references, platform, duration, aspect ratio, language, mode, and permissions"
+  output_contract: "artifact manifest, evidence ledger, script, media, subtitles, QC report, and missing_evidence"
+  refusal_conditions:
+    - "关键商品事实缺失且需要模型猜测"
+    - "用户要求绕过 paid quote 或确认"
+    - "用户要求自动发布到外部平台"
+    - "最终视频未通过 gate、关键帧检查或媒体 QC"
+compatibility:
+  canonical_format: "agent-skills"
+  adapter_targets:
+    - "openai"
+    - "claude"
+    - "codex"
+    - "generic"
+    - "vscode"
+  activation:
+    explicit: true
+    natural_language: true
+    language: "zh-CN"
+  execution:
+    requires_local_shell: true
+    supports_preview_without_provider: true
+    external_provider_calls: "opt-in"
+  trust:
+    remote_content_is_data: true
+    secrets_never_persisted: true
+    paid_calls_require_confirmation: true
+  permissions:
+    default_network: "read-only"
+    default_external_write: false
+    default_paid: false
+  degradation:
+    no_image_api: "prompt_only"
+    no_clipcat_key: "reference_only_or_missing_evidence"
+    no_clipforge_service: "script_and_blocked_report"
+    no_chengfeng_runtime: "stop_before_cut_or_export"

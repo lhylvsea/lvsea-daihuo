@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "lvsea-daihuo request",
+  "type": "object",
+  "required": ["product", "goal"],
+  "properties": {
+    "product": {
+      "type": "object",
+      "required": ["name", "facts"],
+      "properties": {
+        "name": {"type": "string", "minLength": 1},
+        "facts": {"type": "array", "minItems": 1},
+        "claims": {"type": "array"},
+        "assets": {"type": "array", "items": {"type": "string"}}
+      },
+      "additionalProperties": true
+    },
+    "goal": {
+      "type": "object",
+      "required": ["platform", "duration_sec"],
+      "properties": {
+        "platform": {"enum": ["douyin", "kuaishou", "xiaohongshu", "tiktok", "reels", "shorts", "shipinhao"]},
+        "duration_sec": {"type": "number", "minimum": 5, "maximum": 180},
+        "aspect_ratio": {"enum": ["9:16", "16:9", "1:1"]},
+        "language": {"type": "string"},
+        "cta": {"type": "string"}
+      },
+      "additionalProperties": true
+    },
+    "references": {"type": "array", "items": {"type": "string"}},
+    "talking_head_video": {"type": ["string", "null"]},
+    "mode": {"enum": ["preview", "free", "paid", "talking-head"]},
+    "permissions": {
+      "type": "object",
+      "properties": {
+        "allow_paid": {"type": "boolean"},
+        "allow_publish": {"const": false}
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": true
+}

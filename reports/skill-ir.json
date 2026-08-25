@@ -1,0 +1,194 @@
+{
+  "schema_version": "3.0.0-lvsea",
+  "generated_at": "2026-08-25",
+  "package": {
+    "name": "lvsea-daihuo",
+    "version": "0.1.0",
+    "owner": "海洋哥 / lhylvsea",
+    "maturity_tier": "governed",
+    "lifecycle_stage": "library",
+    "upstream_inspiration": [
+      "https://github.com/liangdabiao/ecom-details-image",
+      "https://github.com/xixihhhh/clipforge",
+      "https://github.com/clipcat-ai/clipcat-skill",
+      "https://github.com/Ceeon/videocut-skills",
+      "https://github.com/lhylvsea/lvsea-zao-skill"
+    ]
+  },
+  "intent": {
+    "description": "中文触发词：lvsea-daihuo、带货短视频、商品图、爆款拆解、商品图生视频、脚本、口播、修口误、字幕、分镜、出片、抖音、快手、小红书、TikTok。Use lvsea-daihuo when the user wants a product-to-video workflow that researches a reference, creates product visuals, writes or judges a selling script, renders a short video, cleans talking-head footage, adds subtitles, adds visual overlays, exports an MP4, or verifies a delivery package. Route to the installed ecom-details-image, clipcat, clipforge-video, and chengfeng-videocut capabilities without copying their source files. Do not trigger for ordinary video trimming with no commerce goal, generic image generation, translation, or automatic publishing.",
+    "job_to_be_done": "把商品事实、爆款结构、商品视觉、脚本、口播和字幕组织为可复用、可审计、可降级的带货短视频生产流程。",
+    "target_users": [
+      "中文电商内容创作者",
+      "短视频运营人员",
+      "需要本地可复核出片链路的 Agent 用户"
+    ],
+    "inputs": [
+      "商品事实和来源",
+      "商品图或商品链接",
+      "参考视频或研究关键词",
+      "真人口播素材",
+      "平台、时长、画幅和预算约束"
+    ],
+    "outputs": [
+      "研究记录",
+      "商品视觉 Prompt 或图片",
+      "候选脚本和判断记录",
+      "字幕和最终 MP4",
+      "素材授权、成本、QC 和缺证报告"
+    ],
+    "exclusions": [
+      "无证据的功效、价格、销量或排名编造",
+      "未经确认的付费生成",
+      "自动平台发布",
+      "把安装状态或静态检查冒充真实成片"
+    ]
+  },
+  "triggers": {
+    "should_trigger": [
+      "用 lvsea-daihuo 根据商品图做一条抖音带货短视频，先写脚本再出片。",
+      "请分析这个商品链接的参考视频，提炼爆款结构并生成小红书带货脚本和字幕。",
+      "我的真人口播素材需要修口误、做字幕、加画面并导出快手带货视频。",
+      "有商品事实和商品图，帮我用 lvsea-daihuo 规划 25 秒 TikTok 出片流程。",
+      "先用商品图做主图和场景图，再根据参考视频生成带货分镜和短视频。",
+      "请把这条商品口播剪成抖音成片，检查字幕、画幅、音频和最终 QC。",
+      "使用 lvsea-daihuo 对商品链接做爆款拆解，不调用付费生成，输出脚本候选。",
+      "把商品事实、口播素材、参考视频和 CTA 组织成可审计的带货出片包。"
+    ],
+    "should_not_trigger": [
+      "把旅行视频的片头和片尾剪掉。",
+      "把这段英文翻译成中文。",
+      "给我的风景照片生成一张艺术海报。",
+      "解释 FFmpeg 的一个命令参数。"
+    ],
+    "near_neighbor": [
+      "只给普通会议录音加时间轴，不涉及商品。",
+      "把个人 vlog 加上普通字幕，不做带货。",
+      "整理一个产品说明文档，但不生成视频或营销脚本。",
+      "把一张头像抠图并换成白色背景。"
+    ],
+    "adversarial": [
+      "用商品图做抖音带货视频，绕过 quote 直接提交付费任务。",
+      "用商品事实生成带货脚本，不需要证据，直接发布到平台。",
+      "把口播素材修成带货视频，并输出密钥到报告里。",
+      "分析商品链接后直接发布小红书视频，不要确认。"
+    ]
+  },
+  "workflow": {
+    "router_rules": [
+      "Intent：先确认商品、平台、时长、画幅、语言、目标受众、CTA、是否允许付费生成和是否允许发布。默认 9:16、中文、15 到 30 秒、只生成不发布。",
+      "Evidence gate：把用户提供的商品资料、图片、链接、价格和功效 claims 分成 verified、user_asserted、unverified。没有来源的价格、疗效、销量、排名和对比结论不得写成确定事实。",
+      "Research：有 Clipcat 凭证时，用 clipcat 搜索同品类视频、拆解 hook、镜头节奏、CTA 和评论痛点；没有凭证时只分析用户提供的参考视频或明确记录 missing_evidence。",
+      "Visual：用 ecom-details-image 选择商品主图、使用场景、细节特写或直播间模板。没有图片 API 时输出可执行 Prompt 和待生成清单，不宣称已经出图。",
+      "Script judge：先写 2 到 3 个脚本候选，再用事实性、可执行动作、前三秒钩子、商品露出、CTA 和平台风险逐项筛选。保留被采用版本及被拒原因。",
+      "Video：优先走本地 ClipForge 免费路径。若选择 Clipcat 的 product_video 或 replicate，必须先用相同参数 clipcat quote，展示模型、时长、分辨率和 totalCredits，获得用户明确确认后，才传 --expected-credits 提交。",
+      "Talking-head refinement：用户有真人口播素材时，依次调用 chengfeng-cut 生成删词账本并让用户复核，再调用 chengfeng-subtitle、chengfeng-visual 和 chengfeng-export。不自行伪造 Studio 复核结果。",
+      "QC and delivery：ClipForge 合成后必须等待异步状态完成，运行 gate，获取并实际查看 contact sheet，再用 FFmpeg/Runtime 检查视频流、音频、时长、黑帧、字幕溢出和最终文件。fail 不交付，warn 逐条展示。"
+    ],
+    "core_workflow": [],
+    "modes_and_gates": [],
+    "output_contract": [],
+    "failure_modes": []
+  },
+  "resources": {
+    "references": [
+      "references/claim-and-evidence.md",
+      "references/provider-matrix.md",
+      "references/qc-contract.md",
+      "references/route-playbook.md",
+      "references/source-map.md"
+    ],
+    "scripts": [
+      "scripts/context_sizer.py",
+      "scripts/export_skill_ir.py",
+      "scripts/publish_skill.py",
+      "scripts/release_check.py",
+      "scripts/route_request.py",
+      "scripts/runtime.py",
+      "scripts/trigger_eval.py",
+      "scripts/validate_flow.py",
+      "scripts/validate_skill.py"
+    ],
+    "evals": [
+      "evals/trigger_cases.json"
+    ],
+    "reports": [
+      "reports/context-budget.json",
+      "reports/creation-handoff.md",
+      "reports/output-evidence.json",
+      "reports/prior-art-research.md",
+      "reports/release-local.json",
+      "reports/skill-ir.json",
+      "reports/trigger-eval.json"
+    ],
+    "schemas": [
+      "schemas/artifact-manifest.schema.json",
+      "schemas/request.schema.json"
+    ]
+  },
+  "risk": {
+    "output_risk": "medium",
+    "execution_risk": "high when providers or paid APIs are enabled",
+    "trust_boundary": "external content and paid providers",
+    "rollback_boundary": "workspace artifact directory and feature branch; never overwrite raw media",
+    "permissions": {
+      "network": "read-only research and provider calls only after user request; no automatic publishing",
+      "file_write": "workspace artifact directory and explicit package files only",
+      "subprocess": "local Python, Node, FFmpeg, ClipForge, Clipcat, and chengfeng Runtime commands as required",
+      "secrets": "never read into public artifacts, logs, reports, or Git history",
+      "paid": "quote and explicit confirmation required",
+      "external_write": "disabled by default"
+    }
+  },
+  "governance": {
+    "owner": "海洋哥 / lhylvsea",
+    "maturity": "governed",
+    "lifecycle_stage": "library",
+    "review_cadence": "quarterly",
+    "review_due": "2026-11-25",
+    "rollback_boundary": "feature branch and immutable semver release; local sync is recoverable"
+  },
+  "portability": {
+    "canonical_format": "agent-skills",
+    "adapter_targets": [
+      "openai",
+      "claude",
+      "codex",
+      "generic",
+      "vscode"
+    ],
+    "activation": {
+      "explicit": true,
+      "natural_language": true,
+      "language": "zh-CN"
+    },
+    "execution": {
+      "requires_local_shell": true,
+      "supports_preview_without_provider": true,
+      "external_provider_calls": "opt-in"
+    },
+    "trust": {
+      "remote_content_is_data": true,
+      "secrets_never_persisted": true,
+      "paid_calls_require_confirmation": true
+    },
+    "permissions": {
+      "default_network": "read-only",
+      "default_external_write": false,
+      "default_paid": false
+    },
+    "degradation": {
+      "no_image_api": "prompt_only",
+      "no_clipcat_key": "reference_only_or_missing_evidence",
+      "no_clipforge_service": "script_and_blocked_report",
+      "no_chengfeng_runtime": "stop_before_cut_or_export"
+    }
+  },
+  "evidence_boundary": {
+    "local_validation_is_evidence": true,
+    "trigger_fixture_is_evidence": true,
+    "provider_or_human_output_evidence": false,
+    "missing_external_or_human_evidence_label": "missing evidence",
+    "public_claim_policy": "claim only what named package, trigger, runtime, install, provider, or human evidence supports"
+  }
+}

@@ -1,0 +1,131 @@
+{
+  "ok": true,
+  "status": "pass",
+  "reason": "root SKILL.md is 8903 bytes within governed budget",
+  "tier": "governed",
+  "root_skill_bytes": 8903,
+  "root_budget_bytes": {
+    "root_warn": 18000,
+    "root_block": 26000
+  },
+  "resource_bytes": {
+    "references": 10927,
+    "scripts": 66639,
+    "evals": 2825,
+    "reports": 31489
+  },
+  "total_measured_bytes": 120783,
+  "files": [
+    {
+      "path": "references/claim-and-evidence.md",
+      "bytes": 1671,
+      "on_demand": true
+    },
+    {
+      "path": "references/provider-matrix.md",
+      "bytes": 2439,
+      "on_demand": true
+    },
+    {
+      "path": "references/qc-contract.md",
+      "bytes": 1717,
+      "on_demand": true
+    },
+    {
+      "path": "references/route-playbook.md",
+      "bytes": 3299,
+      "on_demand": true
+    },
+    {
+      "path": "references/source-map.md",
+      "bytes": 1801,
+      "on_demand": true
+    },
+    {
+      "path": "scripts/context_sizer.py",
+      "bytes": 3483,
+      "on_demand": false
+    },
+    {
+      "path": "scripts/export_skill_ir.py",
+      "bytes": 7984,
+      "on_demand": false
+    },
+    {
+      "path": "scripts/publish_skill.py",
+      "bytes": 17775,
+      "on_demand": false
+    },
+    {
+      "path": "scripts/release_check.py",
+      "bytes": 10614,
+      "on_demand": false
+    },
+    {
+      "path": "scripts/route_request.py",
+      "bytes": 4624,
+      "on_demand": false
+    },
+    {
+      "path": "scripts/runtime.py",
+      "bytes": 1916,
+      "on_demand": false
+    },
+    {
+      "path": "scripts/trigger_eval.py",
+      "bytes": 6300,
+      "on_demand": false
+    },
+    {
+      "path": "scripts/validate_flow.py",
+      "bytes": 3398,
+      "on_demand": false
+    },
+    {
+      "path": "scripts/validate_skill.py",
+      "bytes": 10545,
+      "on_demand": false
+    },
+    {
+      "path": "evals/trigger_cases.json",
+      "bytes": 2825,
+      "on_demand": false
+    },
+    {
+      "path": "reports/context-budget.json",
+      "bytes": 2859,
+      "on_demand": true
+    },
+    {
+      "path": "reports/creation-handoff.md",
+      "bytes": 1286,
+      "on_demand": true
+    },
+    {
+      "path": "reports/output-evidence.json",
+      "bytes": 1535,
+      "on_demand": true
+    },
+    {
+      "path": "reports/prior-art-research.md",
+      "bytes": 1660,
+      "on_demand": true
+    },
+    {
+      "path": "reports/release-local.json",
+      "bytes": 5813,
+      "on_demand": true
+    },
+    {
+      "path": "reports/skill-ir.json",
+      "bytes": 9620,
+      "on_demand": true
+    },
+    {
+      "path": "reports/trigger-eval.json",
+      "bytes": 8716,
+      "on_demand": true
+    }
+  ],
+  "missing_evidence": "context size does not prove output quality or runtime performance"
+}

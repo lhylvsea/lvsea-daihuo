@@ -1,0 +1,33 @@
+{
+  "evidence_kind": "missing_evidence",
+  "ok": false,
+  "status": "not_run",
+  "provider_runs": [],
+  "human_reviews": [],
+  "local_runtime": {
+    "chengfeng_plugin": "0.10.8 installed and upstream npm tests passed",
+    "chengfeng_runtime": "0.4.8 installed and doctor passed",
+    "chengfeng_service": "ensure blocked by an unknown service/port conflict on 127.0.0.1:5190; no process was stopped",
+    "clipforge": "CLI help passed; no local ClipForge project rendered",
+    "clipcat": "CLI not installed and no API credential was available",
+    "ecom_image": "generator syntax check passed; no image provider call was made"
+  },
+  "missing_evidence": [
+    "no Clipcat API credential was available for a real research or paid generation call",
+    "no ClipForge project was rendered in this package build",
+    "Ceeon Runtime is installed, but the managed service has not passed ensure on this host",
+    "no real product input and no blind human review were supplied"
+  ],
+  "allowed_public_claims": [
+    "the package contract and trigger fixtures pass locally",
+    "the four upstream entrypoints were discovered and installed separately",
+    "the Ceeon plugin tests passed and its Runtime doctor passed",
+    "the composite documents provider-specific runnable routes and stop conditions"
+  ],
+  "forbidden_public_claims": [
+    "a provider-backed MP4 was produced",
+    "Clipcat cost or task execution was verified",
+    "the Ceeon service is running on this host",
+    "chengfeng Runtime is ready on every machine"
+  ]
+}
